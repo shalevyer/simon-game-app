@@ -170,7 +170,7 @@ export const GameOverScreen: React.FC<GameOverScreenProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-4 relative overflow-hidden w-full">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-6 relative overflow-hidden w-full">
       {/* Animated background */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-accent-900/30 via-primary-900/30 to-accent-900/30"></div>
@@ -181,10 +181,10 @@ export const GameOverScreen: React.FC<GameOverScreenProps> = ({
       {/* Confetti */}
       {showConfetti && <Confetti />}
       
-      <div className="relative z-10 w-full animate-scale-in px-4">
+      <div className="relative z-10 w-full animate-scale-in px-6 py-4">
         {/* Game Over Title */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl sm:text-5xl font-bold text-white mb-3 tracking-tight drop-shadow-lg">
+        <div className="text-center mb-10">
+          <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4 tracking-tight drop-shadow-lg">
             Game Over
           </h1>
           <div className="text-4xl">🎉</div>
@@ -192,7 +192,7 @@ export const GameOverScreen: React.FC<GameOverScreenProps> = ({
 
         {/* Winner Section */}
         {winner && (
-          <div className="glass-dark border-2 border-yellow-400/50 rounded-3xl p-8 mb-6 text-center relative overflow-hidden bg-gradient-to-br from-yellow-500/20 to-orange-500/20 shadow-glow-lg">
+          <div className="glass-dark border-2 border-yellow-400/50 rounded-3xl p-10 mb-8 text-center relative overflow-hidden bg-gradient-to-br from-yellow-500/20 to-orange-500/20 shadow-glow-lg">
             {/* Glow effect */}
             <div className="absolute inset-0 bg-yellow-400/10 animate-pulse-slow" />
             
@@ -226,12 +226,12 @@ export const GameOverScreen: React.FC<GameOverScreenProps> = ({
 
         {/* Scoreboard (Multiplayer only) */}
         {!isSoloGame && finalScores.length > 0 && (
-          <div className="glass-dark rounded-2xl p-5 mb-6 border border-white/10 shadow-large">
-            <h3 className="text-white font-bold text-center mb-4 text-sm uppercase tracking-wider">
+          <div className="glass-dark rounded-2xl p-6 mb-8 border border-white/10 shadow-large">
+            <h3 className="text-white font-bold text-center mb-5 text-sm uppercase tracking-wider">
               Final Standings
             </h3>
             
-            <div className="space-y-3">
+            <div className="space-y-4">
               {finalScores.map((player, index) => {
                 const isCurrentPlayer = player.playerId === currentPlayerId;
                 const rank = index + 1;
@@ -272,7 +272,7 @@ export const GameOverScreen: React.FC<GameOverScreenProps> = ({
         )}
 
         {/* Game Stats */}
-        <div className="glass-dark rounded-2xl p-6 mb-6 border border-white/10 shadow-large">
+        <div className="glass-dark rounded-2xl p-8 mb-8 border border-white/10 shadow-large">
           <div className="flex justify-around text-center">
             <div>
               <div className="text-3xl font-bold text-white mb-1">{roundsPlayed}</div>
@@ -300,7 +300,7 @@ export const GameOverScreen: React.FC<GameOverScreenProps> = ({
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center gap-5">
           {/* Play Again Button */}
           <button
             onClick={onPlayAgain}

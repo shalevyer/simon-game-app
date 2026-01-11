@@ -281,7 +281,7 @@ export function WaitingRoomPage() {
   // Render game board if active
   if (roomStatus === 'active' && isGameActive) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-2 relative overflow-hidden w-full">
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-4 relative overflow-hidden w-full">
         {/* Animated background */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-accent-900/20 via-primary-900/20 to-accent-900/20"></div>
@@ -295,7 +295,7 @@ export function WaitingRoomPage() {
         {/* Exit Button */}
         <button
           onClick={handleGoHome}
-          className="fixed top-4 left-4 z-50 w-14 h-14 rounded-2xl bg-white/10 hover:bg-white/20 border-2 border-white/20 hover:border-white/30 backdrop-premium text-white font-semibold transition-premium shadow-large hover:shadow-glow active:scale-95 flex items-center justify-center group"
+          className="fixed top-6 left-6 z-50 w-14 h-14 rounded-2xl bg-white/10 hover:bg-white/20 border-2 border-white/20 hover:border-white/30 backdrop-premium text-white font-semibold transition-premium shadow-large hover:shadow-glow active:scale-95 flex items-center justify-center group"
           style={{ touchAction: 'manipulation' }}
           aria-label="Exit game"
           title="Exit to home"
@@ -303,12 +303,12 @@ export function WaitingRoomPage() {
           <span className="text-xl group-hover:rotate-90 transition-transform">✕</span>
         </button>
         
-        <div className="flex flex-col items-center w-full relative z-10 px-4">
+        <div className="flex flex-col items-center w-full relative z-10 px-6 py-4">
           {/* Step 4: Scoreboard */}
           {isGameActive && Object.keys(scores).length > 0 && (
-            <div className="glass-dark rounded-2xl p-4 mb-4 w-full border border-white/10 shadow-large">
-              <h3 className="text-white/90 font-bold text-sm mb-3 uppercase tracking-wider">Leaderboard</h3>
-              <div className="space-y-2">
+            <div className="glass-dark rounded-2xl p-6 mb-6 w-full border border-white/10 shadow-large">
+              <h3 className="text-white/90 font-bold text-sm mb-4 uppercase tracking-wider">Leaderboard</h3>
+              <div className="space-y-3">
                 {players.map((player) => {
                   const score = scores[player.id] || 0;
                   const hasSubmitted = submittedPlayers.includes(player.id);
@@ -348,9 +348,9 @@ export function WaitingRoomPage() {
           
           {/* Step 4: Eliminated Message */}
           {isEliminated && (
-            <div className="glass-dark border-2 border-red-500/50 rounded-2xl p-6 mb-4 text-center w-full bg-red-500/10 shadow-large">
-              <div className="text-5xl mb-3">💀</div>
-              <div className="text-white text-xl font-bold mb-1">Eliminated!</div>
+            <div className="glass-dark border-2 border-red-500/50 rounded-2xl p-8 mb-6 text-center w-full bg-red-500/10 shadow-large">
+              <div className="text-5xl mb-4">💀</div>
+              <div className="text-white text-xl font-bold mb-2">Eliminated!</div>
               <div className="text-white/70 text-sm">Better luck next round</div>
             </div>
           )}
@@ -376,14 +376,14 @@ export function WaitingRoomPage() {
           />
           
           {/* Message Display */}
-          <div className="mt-6 text-center">
+          <div className="mt-8 text-center px-4">
             <p className="text-white text-lg sm:text-xl font-semibold drop-shadow-lg">{message}</p>
           </div>
           
           {/* Players Status */}
-          <div className="mt-8 glass-dark rounded-2xl p-5 border border-white/10">
-            <h3 className="text-white font-bold mb-4 text-sm uppercase tracking-wider">Players</h3>
-            <div className="grid grid-cols-2 gap-3">
+          <div className="mt-10 glass-dark rounded-2xl p-6 border border-white/10 w-full">
+            <h3 className="text-white font-bold mb-5 text-sm uppercase tracking-wider">Players</h3>
+            <div className="grid grid-cols-2 gap-4">
               {players.map(player => (
                 <div key={player.id} className="flex items-center gap-2 text-white/90 text-sm font-medium">
                   <span className="text-lg">{player.avatar}</span>
@@ -401,13 +401,13 @@ export function WaitingRoomPage() {
   // Render countdown
   if (roomStatus === 'countdown' && countdownValue !== null) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-primary-600 via-accent-600 to-primary-700 flex items-center justify-center p-4 relative overflow-hidden w-full">
+      <div className="min-h-screen bg-gradient-to-br from-primary-600 via-accent-600 to-primary-700 flex items-center justify-center p-6 relative overflow-hidden w-full">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-pulse-slow"></div>
         </div>
-        <div className="text-center relative z-10 w-full px-4">
+        <div className="text-center relative z-10 w-full px-6">
           <div className="inline-block">
-            <h1 className="text-8xl font-bold text-white mb-6 drop-shadow-2xl animate-scale-in" style={{ textShadow: '0 0 40px rgba(255,255,255,0.5)' }}>
+            <h1 className="text-8xl font-bold text-white mb-8 drop-shadow-2xl animate-scale-in" style={{ textShadow: '0 0 40px rgba(255,255,255,0.5)' }}>
               {countdownValue}
             </h1>
           </div>
@@ -419,7 +419,7 @@ export function WaitingRoomPage() {
   
   // Render waiting room
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-600 via-accent-600 to-primary-700 flex items-center justify-center p-4 relative overflow-hidden w-full">
+    <div className="min-h-screen bg-gradient-to-br from-primary-600 via-accent-600 to-primary-700 flex items-center justify-center p-6 relative overflow-hidden w-full">
       {/* Animated background */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-accent-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse-slow"></div>
@@ -435,22 +435,22 @@ export function WaitingRoomPage() {
         />
       )}
       
-      <div className="glass rounded-3xl shadow-large p-6 w-full relative z-10 animate-scale-in max-w-full">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-2">Waiting Room</h1>
+      <div className="glass rounded-3xl shadow-large p-10 w-full relative z-10 animate-scale-in max-w-full">
+        <div className="text-center mb-10">
+          <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-3">Waiting Room</h1>
           <p className="text-slate-600 text-sm font-medium">Players are joining...</p>
         </div>
         
         {/* Game Code Display with Share Buttons */}
-        <div className="mb-8">
-          <div className="bg-gradient-to-r from-accent-50 to-primary-50 rounded-2xl p-6 mb-4 border-2 border-accent-200">
-            <p className="text-center text-slate-600 mb-2 text-sm font-medium">Game Code</p>
-            <p className="text-center font-mono font-bold text-3xl sm:text-4xl text-accent-700 tracking-wider mb-4">
+        <div className="mb-10">
+          <div className="bg-gradient-to-r from-accent-50 to-primary-50 rounded-2xl p-8 mb-6 border-2 border-accent-200">
+            <p className="text-center text-slate-600 mb-3 text-sm font-medium">Game Code</p>
+            <p className="text-center font-mono font-bold text-3xl sm:text-4xl text-accent-700 tracking-wider mb-6">
               {gameCode}
             </p>
             
             {/* Invite Buttons */}
-            <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <button
                 onClick={copyGameCode}
                 className="btn-premium-secondary text-sm py-3 px-6"
@@ -487,18 +487,18 @@ export function WaitingRoomPage() {
         </div>
         
         {/* Players List */}
-        <div className="mb-8">
-          <h2 className="text-lg sm:text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+        <div className="mb-10">
+          <h2 className="text-lg sm:text-xl font-bold text-slate-900 mb-5 flex items-center gap-2">
             <span>Players</span>
             <span className="bg-accent-100 text-accent-700 px-3 py-1 rounded-full text-sm font-semibold">
               {players.length}
             </span>
           </h2>
-          <div className="space-y-3">
+          <div className="space-y-4">
             {players.map(player => (
               <div 
                 key={player.id} 
-                className={`bg-white rounded-xl p-4 flex items-center justify-between shadow-soft hover:shadow-medium transition-all ${
+                className={`bg-white rounded-xl p-5 flex items-center justify-between shadow-soft hover:shadow-medium transition-all ${
                   player.id === playerId ? 'ring-2 ring-accent-500 bg-accent-50' : ''
                 }`}
               >

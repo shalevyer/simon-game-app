@@ -354,7 +354,7 @@ export const CircularSimonBoard: React.FC<CircularSimonBoardProps> = ({
   };
 
   return (
-    <div className="game-area flex flex-col items-center gap-3 w-full">
+    <div className="game-area flex flex-col items-center gap-5 w-full px-4">
       {/* Round Display */}
       <div className="text-center">
         <h2 className="text-xl sm:text-2xl font-bold text-white mb-1">

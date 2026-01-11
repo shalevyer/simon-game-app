@@ -65,23 +65,23 @@ export function EntryPage() {
 
   if (!mode) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-primary-600 via-accent-600 to-primary-700 flex items-center justify-center p-4 relative overflow-hidden w-full">
+      <div className="min-h-screen bg-gradient-to-br from-primary-600 via-accent-600 to-primary-700 flex items-center justify-center p-6 relative overflow-hidden w-full">
         {/* Animated background elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-40 -right-40 w-80 h-80 bg-accent-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse-slow"></div>
           <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-primary-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse-slow" style={{ animationDelay: '1s' }}></div>
         </div>
         
-        <div className="glass rounded-3xl shadow-large p-8 w-full relative z-10 animate-scale-in max-w-full">
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-accent-500 to-primary-500 shadow-glow mb-4">
+        <div className="glass rounded-3xl shadow-large p-10 w-full relative z-10 animate-scale-in max-w-full">
+          <div className="text-center mb-10">
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-accent-500 to-primary-500 shadow-glow mb-6">
               <span className="text-4xl">🎮</span>
             </div>
-            <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-2 tracking-tight">Shalev Says</h1>
+            <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-3 tracking-tight">Shalev Says</h1>
             <p className="text-slate-600 text-base font-medium">Memory Challenge Game</p>
           </div>
           
-          <div className="flex flex-col items-center gap-4">
+          <div className="flex flex-col items-center gap-5">
             <button
               onClick={() => setMode('create')}
               className="btn-premium-gradient from-accent-600 to-accent-700 hover:from-accent-700 hover:to-accent-800 text-white font-semibold text-lg group"
@@ -106,23 +106,23 @@ export function EntryPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-600 via-accent-600 to-primary-700 flex items-center justify-center p-4 relative overflow-hidden w-full">
+    <div className="min-h-screen bg-gradient-to-br from-primary-600 via-accent-600 to-primary-700 flex items-center justify-center p-6 relative overflow-hidden w-full">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-accent-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse-slow"></div>
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-primary-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse-slow" style={{ animationDelay: '1s' }}></div>
       </div>
       
-      <div className="glass rounded-3xl shadow-large p-8 w-full relative z-10 animate-scale-in max-w-full">
+      <div className="glass rounded-3xl shadow-large p-10 w-full relative z-10 animate-scale-in max-w-full">
         <button
           onClick={() => setMode(null)}
-          className="text-slate-600 hover:text-slate-900 active:text-slate-900 mb-6 text-sm font-medium flex items-center gap-2 transition-colors group"
+          className="text-slate-600 hover:text-slate-900 active:text-slate-900 mb-8 text-sm font-medium flex items-center gap-2 transition-colors group"
         >
           <span className="group-hover:-translate-x-1 transition-transform">←</span>
           <span>Back</span>
         </button>
         
-        <div className="mb-8">
+        <div className="mb-10">
           <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-2">
             {mode === 'create' ? 'Create Game' : 'Join Game'}
           </h2>
@@ -131,9 +131,9 @@ export function EntryPage() {
           </p>
         </div>
         
-        <form onSubmit={mode === 'create' ? handleCreateGame : handleJoinGame} className="space-y-5">
+        <form onSubmit={mode === 'create' ? handleCreateGame : handleJoinGame} className="space-y-6">
           <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-2">
+            <label className="block text-sm font-semibold text-slate-700 mb-3">
               Display Name
             </label>
             <input
@@ -144,13 +144,13 @@ export function EntryPage() {
               minLength={3}
               maxLength={12}
               required
-              className="w-full px-4 py-3.5 bg-white border-2 border-slate-200 rounded-2xl focus:ring-2 focus:ring-accent-500 focus:border-accent-500 text-base transition-premium shadow-soft hover:shadow-medium"
+              className="w-full px-5 py-4 bg-white border-2 border-slate-200 rounded-2xl focus:ring-2 focus:ring-accent-500 focus:border-accent-500 text-base transition-premium shadow-soft hover:shadow-medium"
             />
           </div>
           
           {mode === 'join' && (
             <div>
-              <label className="block text-sm font-semibold text-slate-700 mb-2">
+              <label className="block text-sm font-semibold text-slate-700 mb-3">
                 Game Code
                 {searchParams.get('join') && (
                   <span className="ml-2 text-xs text-primary-600 font-medium bg-primary-50 px-2 py-1 rounded-md">
@@ -165,16 +165,16 @@ export function EntryPage() {
                 placeholder="ABCDEF"
                 maxLength={6}
                 required
-                className="w-full px-4 py-3.5 bg-white border-2 border-slate-200 rounded-2xl focus:ring-2 focus:ring-accent-500 focus:border-accent-500 uppercase text-base font-semibold tracking-widest transition-premium shadow-soft hover:shadow-medium"
+                className="w-full px-5 py-4 bg-white border-2 border-slate-200 rounded-2xl focus:ring-2 focus:ring-accent-500 focus:border-accent-500 uppercase text-base font-semibold tracking-widest transition-premium shadow-soft hover:shadow-medium"
               />
             </div>
           )}
           
           <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-3">
+            <label className="block text-sm font-semibold text-slate-700 mb-4">
               Choose Avatar
             </label>
-            <div className="grid grid-cols-4 gap-3">
+            <div className="grid grid-cols-4 gap-4">
               {['1', '2', '3', '4', '5', '6', '7', '8'].map((id) => (
                 <button
                   key={id}

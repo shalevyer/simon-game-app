@@ -47,6 +47,7 @@
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
+    padding: 1rem; /* Generous padding to prevent border touching */
   }
   
   * {
