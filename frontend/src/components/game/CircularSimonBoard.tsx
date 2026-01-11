@@ -179,7 +179,8 @@ export const CircularSimonBoard: React.FC<CircularSimonBoardProps> = ({
       
       return () => clearTimeout(timer);
     }
-  }, [isInputPhase, canSubmit, playerSequence.length, sequence.length, onSubmit]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isInputPhase, canSubmit, playerSequence.length, sequence.length]);
 
   // SVG dimensions
   const size = 300;
