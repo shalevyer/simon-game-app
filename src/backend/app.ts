@@ -17,7 +17,8 @@ import { authRouter } from './controllers/authController';
 const app = express();
 
 // Environment
-const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
+// Normalize FRONTEND_URL - remove trailing slash for CORS matching
+const FRONTEND_URL = (process.env.FRONTEND_URL || 'http://localhost:5173').replace(/\/$/, '');
 const isProduction = process.env.NODE_ENV === 'production';
 
 // =============================================================================

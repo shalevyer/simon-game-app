@@ -14,7 +14,8 @@ import { initializeGameHandlers } from './websocket/gameHandler';
 // =============================================================================
 
 const PORT = process.env.PORT || 3000;
-const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173';
+// Normalize FRONTEND_URL - remove trailing slash for CORS matching
+const FRONTEND_URL = (process.env.FRONTEND_URL || 'http://localhost:5173').replace(/\/$/, '');
 const isProduction = process.env.NODE_ENV === 'production';
 
 // =============================================================================
