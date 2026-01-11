@@ -397,7 +397,7 @@ export const useSimonStore = create<SimonStore>((set, get) => ({
         playerSequence: newPlayerSequence,
         canSubmit,
         message: canSubmit 
-          ? '✅ Sequence complete! Click Submit'
+          ? '✅ Sequence complete! Submitting...'
           : `${newPlayerSequence.length} of ${state.currentSequence.length} colors`,
       };
     });

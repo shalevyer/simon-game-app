@@ -292,6 +292,17 @@ export function WaitingRoomPage() {
         {/* Mute Button */}
         <MuteButton />
         
+        {/* Exit Button */}
+        <button
+          onClick={handleGoHome}
+          className="fixed top-4 left-4 z-50 w-14 h-14 rounded-full bg-white/10 hover:bg-white/20 border-2 border-white/20 hover:border-white/30 backdrop-blur-md text-white font-semibold transition-all duration-300 shadow-large hover:shadow-glow active:scale-95 flex items-center justify-center group"
+          style={{ touchAction: 'manipulation' }}
+          aria-label="Exit game"
+          title="Exit to home"
+        >
+          <span className="text-xl group-hover:rotate-90 transition-transform">✕</span>
+        </button>
+        
         <div className="flex flex-col items-center w-full max-w-md relative z-10">
           {/* Step 4: Scoreboard */}
           {isGameActive && Object.keys(scores).length > 0 && (

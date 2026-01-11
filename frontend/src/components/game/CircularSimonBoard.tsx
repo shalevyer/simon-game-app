@@ -165,6 +165,21 @@ export const CircularSimonBoard: React.FC<CircularSimonBoardProps> = ({
   isTimerPulsing,
 }) => {
   const [activeColor, setActiveColor] = useState<Color | null>(null);
+  
+  // Auto-submit when sequence is complete
+  useEffect(() => {
+    if (isInputPhase && canSubmit && playerSequence.length === sequence.length && sequence.length > 0) {
+      // Small delay for better UX (let user see the completion)
+      const timer = setTimeout(() => {
+        if ('vibrate' in navigator) {
+          navigator.vibrate(100);
+        }
+        onSubmit();
+      }, 300);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [isInputPhase, canSubmit, playerSequence.length, sequence.length, onSubmit]);
 
   // SVG dimensions
   const size = 300;
@@ -482,28 +497,23 @@ export const CircularSimonBoard: React.FC<CircularSimonBoardProps> = ({
         </div>
       )}
 
-      {/* Submit Button */}
+      {/* Progress Indicator (auto-submit when complete) */}
       {isInputPhase && (
-        <button
-          onClick={() => {
-            if (canSubmit && 'vibrate' in navigator) {
-              navigator.vibrate(100);
-            }
-            onSubmit();
-          }}
-          disabled={!canSubmit}
-          style={{ touchAction: 'manipulation' }}
-          className={`
-            w-full max-w-[min(85vw,320px)] px-6 py-3 rounded-xl font-bold text-base
-            min-h-[56px]
-            transition-all duration-100
-            ${canSubmit 
-              ? 'bg-green-500 hover:bg-green-600 active:bg-green-700 text-white cursor-pointer shadow-lg active:scale-95' 
-              : 'bg-gray-600 text-gray-400 cursor-not-allowed opacity-50'}
-          `}
-        >
-          {canSubmit ? '✅ SUBMIT' : `⏳ ${playerSequence.length}/${sequence.length}`}
-        </button>
+        <div className="w-full max-w-[min(85vw,320px)] px-6 py-3 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-center">
+          <div className="text-white/90 font-semibold text-sm mb-2">
+            {canSubmit ? (
+              <span className="text-emerald-300 animate-pulse">✓ Sequence Complete!</span>
+            ) : (
+              <span>⏳ {playerSequence.length} / {sequence.length}</span>
+            )}
+          </div>
+          <div className="w-full bg-white/20 rounded-full h-2 overflow-hidden">
+            <div 
+              className="bg-gradient-to-r from-primary-400 to-accent-400 h-full transition-all duration-300 rounded-full"
+              style={{ width: `${(playerSequence.length / sequence.length) * 100}%` }}
+            />
+          </div>
+        </div>
       )}
     </div>
   );
