@@ -170,7 +170,7 @@ export const GameOverScreen: React.FC<GameOverScreenProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-4 relative overflow-hidden w-full">
       {/* Animated background */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-accent-900/30 via-primary-900/30 to-accent-900/30"></div>
@@ -181,7 +181,7 @@ export const GameOverScreen: React.FC<GameOverScreenProps> = ({
       {/* Confetti */}
       {showConfetti && <Confetti />}
       
-      <div className="relative z-10 w-full max-w-md animate-scale-in">
+      <div className="relative z-10 w-full animate-scale-in px-4">
         {/* Game Over Title */}
         <div className="text-center mb-8">
           <h1 className="text-4xl sm:text-5xl font-bold text-white mb-3 tracking-tight drop-shadow-lg">

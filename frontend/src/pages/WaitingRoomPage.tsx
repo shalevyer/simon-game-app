@@ -281,7 +281,7 @@ export function WaitingRoomPage() {
   // Render game board if active
   if (roomStatus === 'active' && isGameActive) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-2 sm:p-4 relative overflow-hidden">
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-2 relative overflow-hidden w-full">
         {/* Animated background */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-accent-900/20 via-primary-900/20 to-accent-900/20"></div>
@@ -303,7 +303,7 @@ export function WaitingRoomPage() {
           <span className="text-xl group-hover:rotate-90 transition-transform">✕</span>
         </button>
         
-        <div className="flex flex-col items-center w-full max-w-md relative z-10">
+        <div className="flex flex-col items-center w-full relative z-10 px-4">
           {/* Step 4: Scoreboard */}
           {isGameActive && Object.keys(scores).length > 0 && (
             <div className="glass-dark rounded-2xl p-4 mb-4 w-full border border-white/10 shadow-large">
@@ -401,17 +401,17 @@ export function WaitingRoomPage() {
   // Render countdown
   if (roomStatus === 'countdown' && countdownValue !== null) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-primary-600 via-accent-600 to-primary-700 flex items-center justify-center p-4 relative overflow-hidden">
+      <div className="min-h-screen bg-gradient-to-br from-primary-600 via-accent-600 to-primary-700 flex items-center justify-center p-4 relative overflow-hidden w-full">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-pulse-slow"></div>
         </div>
-        <div className="text-center relative z-10">
+        <div className="text-center relative z-10 w-full px-4">
           <div className="inline-block">
-            <h1 className="text-8xl sm:text-9xl md:text-[12rem] font-bold text-white mb-6 drop-shadow-2xl animate-scale-in" style={{ textShadow: '0 0 40px rgba(255,255,255,0.5)' }}>
+            <h1 className="text-8xl font-bold text-white mb-6 drop-shadow-2xl animate-scale-in" style={{ textShadow: '0 0 40px rgba(255,255,255,0.5)' }}>
               {countdownValue}
             </h1>
           </div>
-          <p className="text-2xl sm:text-3xl md:text-4xl text-white/90 font-semibold animate-fade-in">Get ready!</p>
+          <p className="text-2xl text-white font-semibold animate-fade-in">Get ready!</p>
         </div>
       </div>
     );
@@ -419,7 +419,7 @@ export function WaitingRoomPage() {
   
   // Render waiting room
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-600 via-accent-600 to-primary-700 flex items-center justify-center p-4 sm:p-6 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-primary-600 via-accent-600 to-primary-700 flex items-center justify-center p-4 relative overflow-hidden w-full">
       {/* Animated background */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-accent-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse-slow"></div>
@@ -435,7 +435,7 @@ export function WaitingRoomPage() {
         />
       )}
       
-      <div className="glass rounded-3xl shadow-large p-6 sm:p-8 md:p-10 max-w-md sm:max-w-xl md:max-w-2xl w-full relative z-10 animate-scale-in">
+      <div className="glass rounded-3xl shadow-large p-6 w-full relative z-10 animate-scale-in max-w-full">
         <div className="text-center mb-8">
           <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-2">Waiting Room</h1>
           <p className="text-slate-600 text-sm font-medium">Players are joining...</p>

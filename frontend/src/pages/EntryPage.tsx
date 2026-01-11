@@ -65,14 +65,14 @@ export function EntryPage() {
 
   if (!mode) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-primary-600 via-accent-600 to-primary-700 flex items-center justify-center p-4 sm:p-6 relative overflow-hidden">
+      <div className="min-h-screen bg-gradient-to-br from-primary-600 via-accent-600 to-primary-700 flex items-center justify-center p-4 relative overflow-hidden w-full">
         {/* Animated background elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-40 -right-40 w-80 h-80 bg-accent-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse-slow"></div>
           <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-primary-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse-slow" style={{ animationDelay: '1s' }}></div>
         </div>
         
-        <div className="glass rounded-3xl shadow-large p-8 sm:p-10 max-w-md w-full relative z-10 animate-scale-in">
+        <div className="glass rounded-3xl shadow-large p-8 w-full relative z-10 animate-scale-in max-w-full">
           <div className="text-center mb-8">
             <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-accent-500 to-primary-500 shadow-glow mb-4">
               <span className="text-4xl">🎮</span>
@@ -106,14 +106,14 @@ export function EntryPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-600 via-accent-600 to-primary-700 flex items-center justify-center p-4 sm:p-6 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-primary-600 via-accent-600 to-primary-700 flex items-center justify-center p-4 relative overflow-hidden w-full">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-accent-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse-slow"></div>
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-primary-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse-slow" style={{ animationDelay: '1s' }}></div>
       </div>
       
-      <div className="glass rounded-3xl shadow-large p-8 sm:p-10 max-w-md w-full relative z-10 animate-scale-in">
+      <div className="glass rounded-3xl shadow-large p-8 w-full relative z-10 animate-scale-in max-w-full">
         <button
           onClick={() => setMode(null)}
           className="text-slate-600 hover:text-slate-900 active:text-slate-900 mb-6 text-sm font-medium flex items-center gap-2 transition-colors group"
