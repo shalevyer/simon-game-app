@@ -81,10 +81,10 @@ export function EntryPage() {
             <p className="text-slate-600 text-base font-medium">Memory Challenge Game</p>
           </div>
           
-          <div className="flex flex-col items-center gap-6 pt-4">
+          <div className="flex flex-col items-center gap-8 px-4 pt-6 pb-6">
             <button
               onClick={() => setMode('create')}
-              className="btn-premium-gradient from-accent-600 to-accent-700 hover:from-accent-700 hover:to-accent-800 text-white font-semibold text-lg group"
+              className="btn-premium-gradient from-accent-600 to-accent-700 hover:from-accent-700 hover:to-accent-800 text-white font-semibold text-lg group w-full"
               style={{ touchAction: 'manipulation' }}
             >
               <span>Create Game</span>
@@ -93,7 +93,7 @@ export function EntryPage() {
             
             <button
               onClick={() => setMode('join')}
-              className="btn-premium-secondary font-semibold text-lg group"
+              className="btn-premium-secondary font-semibold text-lg group w-full"
               style={{ touchAction: 'manipulation' }}
             >
               <span>Join Game</span>
