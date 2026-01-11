@@ -44,9 +44,24 @@ export async function createSession(
 
     return response.json();
   } catch (error) {
-    console.error('❌ Fetch error:', error);
-    if (error instanceof TypeError && error.message.includes('fetch')) {
-      throw new Error(`Cannot connect to backend at ${API_BASE_URL}. Check if the server is running and CORS is configured.`);
+    console.error('❌ Fetch error details:', {
+      error,
+      message: error instanceof Error ? error.message : String(error),
+      name: error instanceof Error ? error.name : 'Unknown',
+      url,
+    });
+    
+    if (error instanceof TypeError) {
+      // Network error or CORS blocked
+      if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+        throw new Error(
+          `Cannot connect to backend at ${API_BASE_URL}. ` +
+          `This is usually a CORS issue. Check: ` +
+          `1) Backend FRONTEND_URL env var matches your frontend URL, ` +
+          `2) Backend is running and not sleeping, ` +
+          `3) Check browser Network tab for CORS errors.`
+        );
+      }
     }
     throw error;
   }

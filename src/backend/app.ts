@@ -57,7 +57,14 @@ app.get('/health', (_req, res) => {
 });
 
 // CORS debug endpoint (for troubleshooting)
-app.options('*', (_req, res) => {
+app.options('*', (req, res) => {
+  console.log('🔍 OPTIONS preflight request:', {
+    origin: req.headers.origin,
+    expectedOrigin: FRONTEND_URL,
+    method: req.method,
+    path: req.path,
+  });
+  
   res.header('Access-Control-Allow-Origin', FRONTEND_URL);
   res.header('Access-Control-Allow-Credentials', 'true');
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
