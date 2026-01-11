@@ -73,7 +73,7 @@ export function EntryPage() {
         </div>
         
         <div className="glass rounded-3xl shadow-large p-10 w-full relative z-10 animate-scale-in max-w-full">
-          <div className="text-center mb-10">
+          <div className="text-center mb-12">
             <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-accent-500 to-primary-500 shadow-glow mb-6">
               <span className="text-4xl">🎮</span>
             </div>
@@ -81,7 +81,7 @@ export function EntryPage() {
             <p className="text-slate-600 text-base font-medium">Memory Challenge Game</p>
           </div>
           
-          <div className="flex flex-col items-center gap-5">
+          <div className="flex flex-col items-center gap-6 pt-4">
             <button
               onClick={() => setMode('create')}
               className="btn-premium-gradient from-accent-600 to-accent-700 hover:from-accent-700 hover:to-accent-800 text-white font-semibold text-lg group"
