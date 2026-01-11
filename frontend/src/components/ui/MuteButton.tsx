@@ -26,10 +26,10 @@ export const MuteButton: React.FC = () => {
       onClick={handleToggle}
       className={`
         fixed top-4 right-4 z-50
-        w-14 h-14 rounded-full
+        w-14 h-14 rounded-2xl
         flex items-center justify-center
-        transition-all duration-300
-        backdrop-blur-md
+        transition-premium
+        backdrop-premium
         ${isMuted 
           ? 'bg-slate-700/80 hover:bg-slate-600/80 border-2 border-slate-600' 
           : 'bg-emerald-500/80 hover:bg-emerald-400/80 border-2 border-emerald-400'}

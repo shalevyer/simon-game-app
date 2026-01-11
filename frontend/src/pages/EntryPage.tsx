@@ -81,10 +81,10 @@ export function EntryPage() {
             <p className="text-slate-600 text-base font-medium">Memory Challenge Game</p>
           </div>
           
-          <div className="space-y-4">
+          <div className="flex flex-col items-center gap-4">
             <button
               onClick={() => setMode('create')}
-              className="w-full bg-gradient-to-r from-accent-600 to-accent-700 hover:from-accent-700 hover:to-accent-800 text-white font-semibold py-4 px-6 rounded-xl shadow-medium hover:shadow-glow transition-all duration-300 text-lg min-h-[56px] flex items-center justify-center gap-2 group"
+              className="btn-premium-gradient from-accent-600 to-accent-700 hover:from-accent-700 hover:to-accent-800 text-white font-semibold text-lg group"
               style={{ touchAction: 'manipulation' }}
             >
               <span>Create Game</span>
@@ -93,7 +93,7 @@ export function EntryPage() {
             
             <button
               onClick={() => setMode('join')}
-              className="w-full bg-white hover:bg-slate-50 text-slate-900 border-2 border-slate-200 hover:border-primary-300 font-semibold py-4 px-6 rounded-xl shadow-soft hover:shadow-medium transition-all duration-300 text-lg min-h-[56px] flex items-center justify-center gap-2 group"
+              className="btn-premium-secondary font-semibold text-lg group"
               style={{ touchAction: 'manipulation' }}
             >
               <span>Join Game</span>
@@ -144,7 +144,7 @@ export function EntryPage() {
               minLength={3}
               maxLength={12}
               required
-              className="w-full px-4 py-3.5 bg-white border-2 border-slate-200 rounded-xl focus:ring-2 focus:ring-accent-500 focus:border-accent-500 text-base transition-all shadow-soft hover:shadow-medium"
+              className="w-full px-4 py-3.5 bg-white border-2 border-slate-200 rounded-2xl focus:ring-2 focus:ring-accent-500 focus:border-accent-500 text-base transition-premium shadow-soft hover:shadow-medium"
             />
           </div>
           
@@ -165,7 +165,7 @@ export function EntryPage() {
                 placeholder="ABCDEF"
                 maxLength={6}
                 required
-                className="w-full px-4 py-3.5 bg-white border-2 border-slate-200 rounded-xl focus:ring-2 focus:ring-accent-500 focus:border-accent-500 uppercase text-base font-semibold tracking-widest transition-all shadow-soft hover:shadow-medium"
+                className="w-full px-4 py-3.5 bg-white border-2 border-slate-200 rounded-2xl focus:ring-2 focus:ring-accent-500 focus:border-accent-500 uppercase text-base font-semibold tracking-widest transition-premium shadow-soft hover:shadow-medium"
               />
             </div>
           )}
@@ -180,9 +180,9 @@ export function EntryPage() {
                   key={id}
                   type="button"
                   onClick={() => setAvatarId(id)}
-                  className={`p-4 rounded-xl border-2 transition-all duration-300 min-h-[64px] min-w-[64px] flex items-center justify-center ${
+                  className={`p-4 rounded-2xl border-2 transition-premium min-h-[64px] min-w-[64px] flex items-center justify-center ${
                     avatarId === id
-                      ? 'border-accent-500 bg-gradient-to-br from-accent-50 to-primary-50 shadow-medium scale-105'
+                      ? 'border-accent-500 bg-gradient-to-br from-accent-50 to-primary-50 shadow-medium scale-105 ring-2 ring-accent-200'
                       : 'border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50 shadow-soft hover:shadow-medium'
                   }`}
                   style={{ touchAction: 'manipulation' }}
@@ -199,27 +199,29 @@ export function EntryPage() {
             </div>
           )}
           
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-gradient-to-r from-accent-600 to-accent-700 hover:from-accent-700 hover:to-accent-800 disabled:from-slate-400 disabled:to-slate-500 text-white font-semibold py-4 px-6 rounded-xl shadow-medium hover:shadow-glow disabled:shadow-none transition-all duration-300 text-lg min-h-[56px] flex items-center justify-center gap-2"
-            style={{ touchAction: 'manipulation' }}
-          >
-            {loading ? (
-              <>
-                <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                <span>Loading...</span>
-              </>
-            ) : (
-              <>
-                <span>{mode === 'create' ? 'Create Game' : 'Join Game'}</span>
-                <span>→</span>
-              </>
-            )}
-          </button>
+          <div className="flex justify-center">
+            <button
+              type="submit"
+              disabled={loading}
+              className="btn-premium-gradient from-accent-600 to-accent-700 hover:from-accent-700 hover:to-accent-800 disabled:from-slate-400 disabled:to-slate-500 text-white font-semibold text-lg disabled:shadow-none"
+              style={{ touchAction: 'manipulation' }}
+            >
+              {loading ? (
+                <>
+                  <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  <span>Loading...</span>
+                </>
+              ) : (
+                <>
+                  <span>{mode === 'create' ? 'Create Game' : 'Join Game'}</span>
+                  <span>→</span>
+                </>
+              )}
+            </button>
+          </div>
         </form>
       </div>
     </div>

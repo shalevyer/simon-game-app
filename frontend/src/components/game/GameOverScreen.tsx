@@ -300,11 +300,11 @@ export const GameOverScreen: React.FC<GameOverScreenProps> = ({
         </div>
 
         {/* Action Buttons */}
-        <div className="space-y-4">
+        <div className="flex flex-col items-center gap-4">
           {/* Play Again Button */}
           <button
             onClick={onPlayAgain}
-            className="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 active:scale-95 text-lg flex items-center justify-center gap-2 shadow-medium hover:shadow-glow"
+            className="btn-premium-gradient from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold"
             style={{ touchAction: 'manipulation' }}
           >
             <span>🔄</span>
@@ -314,7 +314,7 @@ export const GameOverScreen: React.FC<GameOverScreenProps> = ({
           {/* Home Button */}
           <button
             onClick={onGoHome}
-            className="w-full bg-white/10 hover:bg-white/20 border-2 border-white/20 hover:border-white/30 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-300 active:scale-95 text-lg flex items-center justify-center gap-2 backdrop-blur-sm"
+            className="btn-premium-glass text-white font-semibold"
             style={{ touchAction: 'manipulation' }}
           >
             <span>🏠</span>
@@ -324,7 +324,7 @@ export const GameOverScreen: React.FC<GameOverScreenProps> = ({
           {/* Share Button */}
           <button
             onClick={handleShare}
-            className="w-full bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 active:scale-95 flex items-center justify-center gap-2 shadow-soft hover:shadow-medium"
+            className="btn-premium-gradient from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-semibold py-3"
             style={{ touchAction: 'manipulation' }}
           >
             <span>📤</span>

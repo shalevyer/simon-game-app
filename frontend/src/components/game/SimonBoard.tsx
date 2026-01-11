@@ -290,11 +290,9 @@ export const SimonBoard: React.FC<SimonBoardProps> = ({
           disabled={!canSubmit}
           style={{ touchAction: 'manipulation' }}
           className={`
-            w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl font-bold text-base sm:text-lg
-            min-h-[56px]
-            transition-all duration-75
+            btn-premium font-bold text-base sm:text-lg
             ${canSubmit 
-              ? 'bg-green-500 hover:bg-green-600 active:bg-green-700 text-white cursor-pointer shadow-lg hover:shadow-xl active:scale-95' 
+              ? 'btn-premium-gradient from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white cursor-pointer' 
               : 'bg-gray-600 text-gray-400 cursor-not-allowed opacity-50'}
           `}
         >

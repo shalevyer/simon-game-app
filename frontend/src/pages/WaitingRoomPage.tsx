@@ -295,7 +295,7 @@ export function WaitingRoomPage() {
         {/* Exit Button */}
         <button
           onClick={handleGoHome}
-          className="fixed top-4 left-4 z-50 w-14 h-14 rounded-full bg-white/10 hover:bg-white/20 border-2 border-white/20 hover:border-white/30 backdrop-blur-md text-white font-semibold transition-all duration-300 shadow-large hover:shadow-glow active:scale-95 flex items-center justify-center group"
+          className="fixed top-4 left-4 z-50 w-14 h-14 rounded-2xl bg-white/10 hover:bg-white/20 border-2 border-white/20 hover:border-white/30 backdrop-premium text-white font-semibold transition-premium shadow-large hover:shadow-glow active:scale-95 flex items-center justify-center group"
           style={{ touchAction: 'manipulation' }}
           aria-label="Exit game"
           title="Exit to home"
@@ -450,10 +450,10 @@ export function WaitingRoomPage() {
             </p>
             
             {/* Invite Buttons */}
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
               <button
                 onClick={copyGameCode}
-                className="bg-white hover:bg-slate-50 border-2 border-slate-200 hover:border-slate-300 text-slate-700 font-semibold py-3 px-5 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 text-sm shadow-soft hover:shadow-medium active:scale-95"
+                className="btn-premium-secondary text-sm py-3 px-6"
                 style={{ touchAction: 'manipulation' }}
                 title="Copy game code"
               >
@@ -464,7 +464,7 @@ export function WaitingRoomPage() {
               
               <button
                 onClick={copyInviteLink}
-                className="bg-white hover:bg-slate-50 border-2 border-slate-200 hover:border-slate-300 text-slate-700 font-semibold py-3 px-5 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 text-sm shadow-soft hover:shadow-medium active:scale-95"
+                className="btn-premium-secondary text-sm py-3 px-6"
                 style={{ touchAction: 'manipulation' }}
                 title="Copy invite link"
               >
@@ -475,7 +475,7 @@ export function WaitingRoomPage() {
               
               <button
                 onClick={shareGame}
-                className="bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-semibold py-3 px-5 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 text-sm shadow-medium hover:shadow-glow active:scale-95"
+                className="btn-premium-gradient from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-semibold text-sm py-3 px-6"
                 style={{ touchAction: 'manipulation' }}
                 title="Share with friends"
               >
@@ -529,7 +529,7 @@ export function WaitingRoomPage() {
             )}
             <button
               onClick={handleStartGame}
-              className="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 text-lg min-h-[56px] shadow-medium hover:shadow-glow active:scale-95 flex items-center justify-center gap-2"
+              className="btn-premium-gradient from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold text-lg"
               style={{ touchAction: 'manipulation' }}
             >
               <span>🎮</span>

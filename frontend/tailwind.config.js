@@ -44,6 +44,13 @@ export default {
         'large': '0 10px 40px -10px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.06)',
         'glow': '0 0 20px rgba(168, 85, 247, 0.4)',
         'glow-lg': '0 0 40px rgba(168, 85, 247, 0.5)',
+        'premium': '0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08)',
+        'premium-hover': '0 12px 48px rgba(0, 0, 0, 0.16), 0 4px 12px rgba(0, 0, 0, 0.1)',
+        'premium-glow': '0 0 24px rgba(168, 85, 247, 0.3), 0 8px 32px rgba(0, 0, 0, 0.12)',
+      },
+      borderRadius: {
+        'premium': '20px',
+        'premium-lg': '28px',
       },
       animation: {
         'fade-in': 'fadeIn 0.3s ease-out',
