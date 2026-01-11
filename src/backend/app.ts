@@ -52,7 +52,17 @@ app.get('/health', (_req, res) => {
     status: 'ok', 
     timestamp: new Date().toISOString(),
     environment: isProduction ? 'production' : 'development',
+    frontendUrl: FRONTEND_URL, // Debug: show configured frontend URL
   });
+});
+
+// CORS debug endpoint (for troubleshooting)
+app.options('*', (_req, res) => {
+  res.header('Access-Control-Allow-Origin', FRONTEND_URL);
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.sendStatus(200);
 });
 
 // Auth routes
