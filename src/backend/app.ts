@@ -28,9 +28,13 @@ const isProduction = process.env.NODE_ENV === 'production';
 app.use(cors({
   origin: FRONTEND_URL,
   credentials: true,  // CRITICAL: Allows cookies
-  methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type'],
+  methods: ['GET', 'POST', 'OPTIONS'], // Include OPTIONS for preflight
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  optionsSuccessStatus: 200, // Some legacy browsers (IE11) choke on 204
 }));
+
+// Log CORS configuration
+console.log('🌐 CORS configured for:', FRONTEND_URL);
 
 // Parse JSON bodies
 app.use(express.json());
