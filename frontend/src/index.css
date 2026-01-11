@@ -1,22 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 /* =============================================================================
-   MOBILE-FIRST CSS RULES
-   Based on: .cursor/MOBILE_FIRST.md
+   MODERN DESIGN SYSTEM
    ============================================================================= */
 
-body {
-  margin: 0;
-  min-height: 100vh;
-  font-family: system-ui, -apple-system, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-modern: linear-gradient(135deg, #0ea5e9 0%, #7e22ce 100%);
+  --gradient-subtle: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+@layer base {
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: var(--gradient-modern);
+    color: #1e293b;
+    
+    /* Prevent overscroll bounce (iOS pull-to-refresh) */
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
+  }
   
-  /* Prevent overscroll bounce (iOS pull-to-refresh) */
-  overscroll-behavior: none;
-  -webkit-overflow-scrolling: touch;
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  button {
+    touch-action: manipulation;
+  }
 }
 
 /* Prevent tap highlight flash on mobile */
@@ -51,6 +70,10 @@ textarea {
   font-size: 16px !important;
 }
 
+/* =============================================================================
+   MODERN ANIMATIONS & UTILITIES
+   ============================================================================= */
+
 @keyframes slide-in {
   from {
     transform: translateX(100%);
@@ -64,4 +87,34 @@ textarea {
 
 .animate-slide-in {
   animation: slide-in 0.3s ease-out;
+}
+
+/* Glassmorphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-dark {
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Smooth transitions */
+.transition-smooth {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Modern card hover effect */
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.2);
 }

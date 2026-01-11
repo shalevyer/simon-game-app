@@ -65,26 +65,39 @@ export function EntryPage() {
 
   if (!mode) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center p-3 sm:p-4">
-        <div className="bg-white rounded-2xl sm:rounded-3xl shadow-2xl p-6 sm:p-8 max-w-md w-full">
-          <h1 className="text-3xl sm:text-4xl font-bold text-center mb-2">🎮 Simon Says</h1>
-          <p className="text-gray-600 text-center mb-6 sm:mb-8 text-sm sm:text-base">Color Race Edition</p>
+      <div className="min-h-screen bg-gradient-to-br from-primary-600 via-accent-600 to-primary-700 flex items-center justify-center p-4 sm:p-6 relative overflow-hidden">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute -top-40 -right-40 w-80 h-80 bg-accent-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse-slow"></div>
+          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-primary-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse-slow" style={{ animationDelay: '1s' }}></div>
+        </div>
+        
+        <div className="glass rounded-3xl shadow-large p-8 sm:p-10 max-w-md w-full relative z-10 animate-scale-in">
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-accent-500 to-primary-500 shadow-glow mb-4">
+              <span className="text-4xl">🎮</span>
+            </div>
+            <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-2 tracking-tight">Shalev Says</h1>
+            <p className="text-slate-600 text-base font-medium">Memory Challenge Game</p>
+          </div>
           
-          <div className="space-y-3 sm:space-y-4">
+          <div className="space-y-4">
             <button
               onClick={() => setMode('create')}
-              className="w-full bg-purple-600 hover:bg-purple-700 active:bg-purple-800 active:scale-98 text-white font-bold py-3 sm:py-4 px-6 rounded-lg sm:rounded-xl transition-all duration-75 text-base sm:text-lg min-h-[56px]"
+              className="w-full bg-gradient-to-r from-accent-600 to-accent-700 hover:from-accent-700 hover:to-accent-800 text-white font-semibold py-4 px-6 rounded-xl shadow-medium hover:shadow-glow transition-all duration-300 text-lg min-h-[56px] flex items-center justify-center gap-2 group"
               style={{ touchAction: 'manipulation' }}
             >
-              Create Game
+              <span>Create Game</span>
+              <span className="group-hover:translate-x-1 transition-transform">→</span>
             </button>
             
             <button
               onClick={() => setMode('join')}
-              className="w-full bg-blue-600 hover:bg-blue-700 active:bg-blue-800 active:scale-98 text-white font-bold py-3 sm:py-4 px-6 rounded-lg sm:rounded-xl transition-all duration-75 text-base sm:text-lg min-h-[56px]"
+              className="w-full bg-white hover:bg-slate-50 text-slate-900 border-2 border-slate-200 hover:border-primary-300 font-semibold py-4 px-6 rounded-xl shadow-soft hover:shadow-medium transition-all duration-300 text-lg min-h-[56px] flex items-center justify-center gap-2 group"
               style={{ touchAction: 'manipulation' }}
             >
-              Join Game
+              <span>Join Game</span>
+              <span className="group-hover:translate-x-1 transition-transform">→</span>
             </button>
           </div>
         </div>
@@ -93,22 +106,34 @@ export function EntryPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center p-3 sm:p-4">
-      <div className="bg-white rounded-2xl sm:rounded-3xl shadow-2xl p-6 sm:p-8 max-w-md w-full">
+    <div className="min-h-screen bg-gradient-to-br from-primary-600 via-accent-600 to-primary-700 flex items-center justify-center p-4 sm:p-6 relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-accent-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse-slow"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-primary-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse-slow" style={{ animationDelay: '1s' }}></div>
+      </div>
+      
+      <div className="glass rounded-3xl shadow-large p-8 sm:p-10 max-w-md w-full relative z-10 animate-scale-in">
         <button
           onClick={() => setMode(null)}
-          className="text-gray-600 hover:text-gray-800 active:text-gray-900 mb-4 text-sm sm:text-base"
+          className="text-slate-600 hover:text-slate-900 active:text-slate-900 mb-6 text-sm font-medium flex items-center gap-2 transition-colors group"
         >
-          ← Back
+          <span className="group-hover:-translate-x-1 transition-transform">←</span>
+          <span>Back</span>
         </button>
         
-        <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">
-          {mode === 'create' ? 'Create Game' : 'Join Game'}
-        </h2>
+        <div className="mb-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-2">
+            {mode === 'create' ? 'Create Game' : 'Join Game'}
+          </h2>
+          <p className="text-slate-600 text-sm">
+            {mode === 'create' ? 'Start a new game session' : 'Enter a game code to join'}
+          </p>
+        </div>
         
-        <form onSubmit={mode === 'create' ? handleCreateGame : handleJoinGame} className="space-y-3 sm:space-y-4">
+        <form onSubmit={mode === 'create' ? handleCreateGame : handleJoinGame} className="space-y-5">
           <div>
-            <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5 sm:mb-2">
+            <label className="block text-sm font-semibold text-slate-700 mb-2">
               Display Name
             </label>
             <input
@@ -119,17 +144,17 @@ export function EntryPage() {
               minLength={3}
               maxLength={12}
               required
-              className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent text-sm sm:text-base"
+              className="w-full px-4 py-3.5 bg-white border-2 border-slate-200 rounded-xl focus:ring-2 focus:ring-accent-500 focus:border-accent-500 text-base transition-all shadow-soft hover:shadow-medium"
             />
           </div>
           
           {mode === 'join' && (
             <div>
-              <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5 sm:mb-2">
+              <label className="block text-sm font-semibold text-slate-700 mb-2">
                 Game Code
                 {searchParams.get('join') && (
-                  <span className="ml-2 text-xs text-green-600 font-normal">
-                    ✅ Pre-filled from invite link
+                  <span className="ml-2 text-xs text-primary-600 font-medium bg-primary-50 px-2 py-1 rounded-md">
+                    Pre-filled
                   </span>
                 )}
               </label>
@@ -140,36 +165,36 @@ export function EntryPage() {
                 placeholder="ABCDEF"
                 maxLength={6}
                 required
-                className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent uppercase text-sm sm:text-base"
+                className="w-full px-4 py-3.5 bg-white border-2 border-slate-200 rounded-xl focus:ring-2 focus:ring-accent-500 focus:border-accent-500 uppercase text-base font-semibold tracking-widest transition-all shadow-soft hover:shadow-medium"
               />
             </div>
           )}
           
           <div>
-            <label className="block text-xs sm:text-sm font-medium text-gray-700 mb-1.5 sm:mb-2">
-              Avatar
+            <label className="block text-sm font-semibold text-slate-700 mb-3">
+              Choose Avatar
             </label>
-            <div className="grid grid-cols-4 gap-1.5 sm:gap-2">
+            <div className="grid grid-cols-4 gap-3">
               {['1', '2', '3', '4', '5', '6', '7', '8'].map((id) => (
                 <button
                   key={id}
                   type="button"
                   onClick={() => setAvatarId(id)}
-                  className={`p-2.5 sm:p-4 rounded-lg border-2 transition-all duration-75 active:scale-95 min-h-[56px] min-w-[56px] ${
+                  className={`p-4 rounded-xl border-2 transition-all duration-300 min-h-[64px] min-w-[64px] flex items-center justify-center ${
                     avatarId === id
-                      ? 'border-purple-600 bg-purple-50'
-                      : 'border-gray-200 hover:border-gray-300 active:border-gray-400'
+                      ? 'border-accent-500 bg-gradient-to-br from-accent-50 to-primary-50 shadow-medium scale-105'
+                      : 'border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50 shadow-soft hover:shadow-medium'
                   }`}
                   style={{ touchAction: 'manipulation' }}
                 >
-                  <span className="text-2xl sm:text-3xl">{['😀', '🎮', '🚀', '⚡', '🎨', '🎯', '🏆', '🌟'][parseInt(id) - 1]}</span>
+                  <span className="text-3xl">{['😀', '🎮', '🚀', '⚡', '🎨', '🎯', '🏆', '🌟'][parseInt(id) - 1]}</span>
                 </button>
               ))}
             </div>
           </div>
           
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-800 px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg text-xs sm:text-sm">
+            <div className="bg-red-50 border-2 border-red-200 text-red-800 px-4 py-3 rounded-xl text-sm font-medium shadow-soft">
               {error}
             </div>
           )}
@@ -177,10 +202,23 @@ export function EntryPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-purple-600 hover:bg-purple-700 active:bg-purple-800 active:scale-98 disabled:bg-gray-400 text-white font-bold py-3 sm:py-4 px-6 rounded-lg sm:rounded-xl transition-all duration-75 text-base sm:text-lg min-h-[56px]"
+            className="w-full bg-gradient-to-r from-accent-600 to-accent-700 hover:from-accent-700 hover:to-accent-800 disabled:from-slate-400 disabled:to-slate-500 text-white font-semibold py-4 px-6 rounded-xl shadow-medium hover:shadow-glow disabled:shadow-none transition-all duration-300 text-lg min-h-[56px] flex items-center justify-center gap-2"
             style={{ touchAction: 'manipulation' }}
           >
-            {loading ? 'Loading...' : mode === 'create' ? 'Create Game' : 'Join Game'}
+            {loading ? (
+              <>
+                <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span>Loading...</span>
+              </>
+            ) : (
+              <>
+                <span>{mode === 'create' ? 'Create Game' : 'Join Game'}</span>
+                <span>→</span>
+              </>
+            )}
           </button>
         </form>
       </div>

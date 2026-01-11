@@ -137,15 +137,15 @@ export const GameOverScreen: React.FC<GameOverScreenProps> = ({
     const rank = finalScores.findIndex(s => s.playerId === currentPlayerId) + 1;
     
     const shareText = isSoloGame
-      ? `🎮 I reached Round ${roundsPlayed} in Simon Says with ${myScore} points! Can you beat my score?`
-      : `🏆 I finished #${rank} in Simon Says with ${myScore} points! ${isWinner ? '👑 WINNER!' : ''}`;
+      ? `🎮 I reached Round ${roundsPlayed} in Shalev Says with ${myScore} points! Can you beat my score?`
+      : `🏆 I finished #${rank} in Shalev Says with ${myScore} points! ${isWinner ? '👑 WINNER!' : ''}`;
     
     const shareUrl = `${window.location.origin}/?join=${gameCode}`;
     
     if (navigator.share) {
       try {
         await navigator.share({
-          title: 'Simon Says Score',
+          title: 'Shalev Says Score',
           text: shareText,
           url: shareUrl,
         });
@@ -170,42 +170,53 @@ export const GameOverScreen: React.FC<GameOverScreenProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 flex items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-4 relative overflow-hidden">
+      {/* Animated background */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-accent-900/30 via-primary-900/30 to-accent-900/30"></div>
+        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-yellow-400/20 rounded-full blur-3xl animate-pulse-slow"></div>
+        <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-emerald-400/20 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1s' }}></div>
+      </div>
+      
       {/* Confetti */}
       {showConfetti && <Confetti />}
       
-      <div className="relative z-10 w-full max-w-md">
+      <div className="relative z-10 w-full max-w-md animate-scale-in">
         {/* Game Over Title */}
-        <div className="text-center mb-6">
-          <h1 className="text-3xl sm:text-4xl font-bold text-white mb-2">
-            🎉 GAME OVER 🎉
+        <div className="text-center mb-8">
+          <h1 className="text-4xl sm:text-5xl font-bold text-white mb-3 tracking-tight drop-shadow-lg">
+            Game Over
           </h1>
+          <div className="text-4xl">🎉</div>
         </div>
 
         {/* Winner Section */}
         {winner && (
-          <div className="bg-gradient-to-br from-yellow-400/20 to-orange-500/20 border-2 border-yellow-400 rounded-2xl p-6 mb-4 text-center relative overflow-hidden">
+          <div className="glass-dark border-2 border-yellow-400/50 rounded-3xl p-8 mb-6 text-center relative overflow-hidden bg-gradient-to-br from-yellow-500/20 to-orange-500/20 shadow-glow-lg">
             {/* Glow effect */}
-            <div className="absolute inset-0 bg-yellow-400/10 animate-pulse" />
+            <div className="absolute inset-0 bg-yellow-400/10 animate-pulse-slow" />
             
             <div className="relative z-10">
               {/* Crown animation */}
-              <div className="text-5xl mb-2 animate-bounce">👑</div>
+              <div className="text-6xl mb-4 animate-bounce drop-shadow-lg">👑</div>
               
-              <h2 className="text-2xl font-bold text-yellow-400 mb-2">
-                {isSoloGame ? 'GREAT JOB!' : 'WINNER!'}
+              <h2 className="text-3xl font-bold text-yellow-300 mb-3 drop-shadow-lg">
+                {isSoloGame ? 'Great Job!' : 'Winner!'}
               </h2>
               
-              <div className="text-white text-xl font-semibold mb-1">
+              <div className="text-white text-2xl font-bold mb-3">
                 {winner.name}
               </div>
               
-              <div className="text-4xl font-bold text-yellow-300">
-                {animatedScore} <span className="text-lg">points</span>
+              <div className="inline-flex items-baseline gap-2 bg-white/10 rounded-2xl px-6 py-4 backdrop-blur-sm">
+                <span className="text-5xl font-bold text-yellow-300">
+                  {animatedScore}
+                </span>
+                <span className="text-lg text-white/80 font-medium">points</span>
               </div>
               
               {isWinner && !isSoloGame && (
-                <div className="mt-2 text-green-400 text-sm font-semibold">
+                <div className="mt-4 text-emerald-300 text-sm font-bold bg-emerald-500/20 px-4 py-2 rounded-full inline-block">
                   ✨ That's YOU! ✨
                 </div>
               )}
@@ -215,12 +226,12 @@ export const GameOverScreen: React.FC<GameOverScreenProps> = ({
 
         {/* Scoreboard (Multiplayer only) */}
         {!isSoloGame && finalScores.length > 0 && (
-          <div className="bg-gray-800/80 rounded-2xl p-4 mb-4">
-            <h3 className="text-white font-bold text-center mb-3 text-sm uppercase tracking-wide">
+          <div className="glass-dark rounded-2xl p-5 mb-6 border border-white/10 shadow-large">
+            <h3 className="text-white font-bold text-center mb-4 text-sm uppercase tracking-wider">
               Final Standings
             </h3>
             
-            <div className="space-y-2">
+            <div className="space-y-3">
               {finalScores.map((player, index) => {
                 const isCurrentPlayer = player.playerId === currentPlayerId;
                 const rank = index + 1;
@@ -228,30 +239,30 @@ export const GameOverScreen: React.FC<GameOverScreenProps> = ({
                 return (
                   <div
                     key={player.playerId}
-                    className={`flex items-center justify-between px-3 py-2 rounded-lg transition-all ${
+                    className={`flex items-center justify-between px-4 py-3 rounded-xl transition-all ${
                       isCurrentPlayer
-                        ? 'bg-blue-600 scale-105'
+                        ? 'bg-gradient-to-r from-primary-500/30 to-accent-500/30 border-2 border-primary-400/50 shadow-glow scale-105'
                         : rank <= 3
-                          ? 'bg-gray-700'
-                          : 'bg-gray-700/50'
+                          ? 'bg-white/10 border border-white/20'
+                          : 'bg-white/5 border border-white/10'
                     }`}
                   >
                     <div className="flex items-center gap-3">
-                      <span className="text-xl w-8 text-center">
+                      <span className="text-2xl w-10 text-center">
                         {getMedal(rank)}
                       </span>
-                      <span className="text-white font-medium">
+                      <span className="text-white font-semibold">
                         {player.name}
-                        {isCurrentPlayer && <span className="text-xs ml-1 text-blue-200">(you)</span>}
+                        {isCurrentPlayer && <span className="text-xs ml-2 text-primary-300 font-normal">(you)</span>}
                       </span>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-white font-bold">
-                        {player.score} pts
-                      </span>
+                    <div className="flex items-center gap-3">
                       {player.isEliminated && (
-                        <span className="text-red-400 text-xs">💀</span>
+                        <span className="text-red-400 text-lg">💀</span>
                       )}
+                      <span className="text-white font-bold text-sm">
+                        {player.score} <span className="text-xs font-normal text-white/70">pts</span>
+                      </span>
                     </div>
                   </div>
                 );
@@ -261,27 +272,27 @@ export const GameOverScreen: React.FC<GameOverScreenProps> = ({
         )}
 
         {/* Game Stats */}
-        <div className="bg-gray-800/60 rounded-xl p-4 mb-6">
+        <div className="glass-dark rounded-2xl p-6 mb-6 border border-white/10 shadow-large">
           <div className="flex justify-around text-center">
             <div>
-              <div className="text-2xl font-bold text-white">{roundsPlayed}</div>
-              <div className="text-gray-400 text-xs">Rounds</div>
+              <div className="text-3xl font-bold text-white mb-1">{roundsPlayed}</div>
+              <div className="text-white/70 text-xs font-medium uppercase tracking-wider">Rounds</div>
             </div>
-            <div className="border-l border-gray-600" />
+            <div className="border-l border-white/20" />
             <div>
-              <div className="text-2xl font-bold text-white">
+              <div className="text-3xl font-bold text-white mb-1">
                 {finalScores.find(s => s.playerId === currentPlayerId)?.score || 0}
               </div>
-              <div className="text-gray-400 text-xs">Your Score</div>
+              <div className="text-white/70 text-xs font-medium uppercase tracking-wider">Your Score</div>
             </div>
             {!isSoloGame && (
               <>
-                <div className="border-l border-gray-600" />
+                <div className="border-l border-white/20" />
                 <div>
-                  <div className="text-2xl font-bold text-white">
+                  <div className="text-3xl font-bold text-white mb-1">
                     #{finalScores.findIndex(s => s.playerId === currentPlayerId) + 1}
                   </div>
-                  <div className="text-gray-400 text-xs">Your Rank</div>
+                  <div className="text-white/70 text-xs font-medium uppercase tracking-wider">Your Rank</div>
                 </div>
               </>
             )}
@@ -289,32 +300,35 @@ export const GameOverScreen: React.FC<GameOverScreenProps> = ({
         </div>
 
         {/* Action Buttons */}
-        <div className="space-y-3">
+        <div className="space-y-4">
           {/* Play Again Button */}
           <button
             onClick={onPlayAgain}
-            className="w-full bg-green-500 hover:bg-green-600 active:bg-green-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-100 active:scale-95 text-lg flex items-center justify-center gap-2 shadow-lg"
+            className="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 active:scale-95 text-lg flex items-center justify-center gap-2 shadow-medium hover:shadow-glow"
             style={{ touchAction: 'manipulation' }}
           >
-            🔄 PLAY AGAIN
+            <span>🔄</span>
+            <span>Play Again</span>
           </button>
 
           {/* Home Button */}
           <button
             onClick={onGoHome}
-            className="w-full bg-gray-700 hover:bg-gray-600 active:bg-gray-500 text-white font-bold py-4 px-6 rounded-xl transition-all duration-100 active:scale-95 text-lg flex items-center justify-center gap-2"
+            className="w-full bg-white/10 hover:bg-white/20 border-2 border-white/20 hover:border-white/30 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-300 active:scale-95 text-lg flex items-center justify-center gap-2 backdrop-blur-sm"
             style={{ touchAction: 'manipulation' }}
           >
-            🏠 HOME
+            <span>🏠</span>
+            <span>Home</span>
           </button>
 
           {/* Share Button */}
           <button
             onClick={handleShare}
-            className="w-full bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-bold py-3 px-6 rounded-xl transition-all duration-100 active:scale-95 flex items-center justify-center gap-2"
+            className="w-full bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 active:scale-95 flex items-center justify-center gap-2 shadow-soft hover:shadow-medium"
             style={{ touchAction: 'manipulation' }}
           >
-            📤 SHARE SCORE
+            <span>📤</span>
+            <span>Share Score</span>
           </button>
         </div>
       </div>

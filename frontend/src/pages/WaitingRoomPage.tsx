@@ -281,15 +281,23 @@ export function WaitingRoomPage() {
   // Render game board if active
   if (roomStatus === 'active' && isGameActive) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 flex items-center justify-center p-2 sm:p-4">
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-2 sm:p-4 relative overflow-hidden">
+        {/* Animated background */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-accent-900/20 via-primary-900/20 to-accent-900/20"></div>
+          <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-accent-500/10 rounded-full blur-3xl animate-pulse-slow"></div>
+          <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1.5s' }}></div>
+        </div>
+        
         {/* Mute Button */}
         <MuteButton />
         
-        <div className="flex flex-col items-center w-full max-w-md">
+        <div className="flex flex-col items-center w-full max-w-md relative z-10">
           {/* Step 4: Scoreboard */}
           {isGameActive && Object.keys(scores).length > 0 && (
-            <div className="bg-gray-800 rounded-xl sm:rounded-2xl p-2 sm:p-3 mb-3 w-full">
-              <div className="space-y-1">
+            <div className="glass-dark rounded-2xl p-4 mb-4 w-full border border-white/10 shadow-large">
+              <h3 className="text-white/90 font-bold text-sm mb-3 uppercase tracking-wider">Leaderboard</h3>
+              <div className="space-y-2">
                 {players.map((player) => {
                   const score = scores[player.id] || 0;
                   const hasSubmitted = submittedPlayers.includes(player.id);
@@ -298,21 +306,27 @@ export function WaitingRoomPage() {
                   return (
                     <div
                       key={player.id}
-                      className={`flex items-center justify-between px-2 sm:px-3 py-1.5 sm:py-2 rounded ${
-                        isCurrentPlayer ? 'bg-blue-600' : 'bg-gray-700'
+                      className={`flex items-center justify-between px-4 py-3 rounded-xl transition-all ${
+                        isCurrentPlayer 
+                          ? 'bg-gradient-to-r from-primary-500/30 to-accent-500/30 border-2 border-primary-400/50 shadow-glow' 
+                          : 'bg-white/5 border border-white/10'
                       }`}
                     >
-                      <span className="text-white text-xs sm:text-sm flex items-center gap-1 sm:gap-2">
-                        <span>{player.avatar}</span>
-                        <span>{player.displayName}</span>
-                      </span>
-                      <div className="flex items-center gap-2">
-                        <span className="text-white text-xs sm:text-sm font-bold">
-                          {score} pts
+                      <div className="flex items-center gap-3">
+                        <span className="text-2xl">{player.avatar}</span>
+                        <span className="text-white font-semibold text-sm sm:text-base">
+                          {player.displayName}
                         </span>
+                      </div>
+                      <div className="flex items-center gap-3">
                         {hasSubmitted && isInputPhase && (
-                          <span className="text-green-400 text-xs">✓</span>
+                          <span className="text-emerald-400 text-lg font-bold">✓</span>
                         )}
+                        <span className={`text-sm sm:text-base font-bold ${
+                          isCurrentPlayer ? 'text-white' : 'text-white/80'
+                        }`}>
+                          {score} <span className="text-xs font-normal">pts</span>
+                        </span>
                       </div>
                     </div>
                   );
@@ -323,11 +337,10 @@ export function WaitingRoomPage() {
           
           {/* Step 4: Eliminated Message */}
           {isEliminated && (
-            <div className="bg-red-500/20 border-2 border-red-500 rounded-xl sm:rounded-2xl p-3 mb-3 text-center w-full">
-              <div className="text-3xl mb-1">💀</div>
-              <div className="text-white text-base sm:text-lg font-bold">
-                Eliminated!
-              </div>
+            <div className="glass-dark border-2 border-red-500/50 rounded-2xl p-6 mb-4 text-center w-full bg-red-500/10 shadow-large">
+              <div className="text-5xl mb-3">💀</div>
+              <div className="text-white text-xl font-bold mb-1">Eliminated!</div>
+              <div className="text-white/70 text-sm">Better luck next round</div>
             </div>
           )}
           
@@ -353,16 +366,18 @@ export function WaitingRoomPage() {
           
           {/* Message Display */}
           <div className="mt-6 text-center">
-            <p className="text-white text-lg font-medium">{message}</p>
+            <p className="text-white text-lg sm:text-xl font-semibold drop-shadow-lg">{message}</p>
           </div>
           
           {/* Players Status */}
-          <div className="mt-8 bg-white/10 backdrop-blur rounded-2xl p-4">
-            <h3 className="text-white font-bold mb-2">Players</h3>
-            <div className="grid grid-cols-2 gap-2">
+          <div className="mt-8 glass-dark rounded-2xl p-5 border border-white/10">
+            <h3 className="text-white font-bold mb-4 text-sm uppercase tracking-wider">Players</h3>
+            <div className="grid grid-cols-2 gap-3">
               {players.map(player => (
-                <div key={player.id} className="text-white/80 text-sm">
-                  {player.displayName} {player.isHost && '👑'}
+                <div key={player.id} className="flex items-center gap-2 text-white/90 text-sm font-medium">
+                  <span className="text-lg">{player.avatar}</span>
+                  <span className="truncate">{player.displayName}</span>
+                  {player.isHost && <span className="text-yellow-400">👑</span>}
                 </div>
               ))}
             </div>
@@ -375,10 +390,17 @@ export function WaitingRoomPage() {
   // Render countdown
   if (roomStatus === 'countdown' && countdownValue !== null) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center p-4">
-        <div className="text-center">
-          <h1 className="text-6xl sm:text-7xl md:text-9xl font-bold text-white mb-4">{countdownValue}</h1>
-          <p className="text-lg sm:text-xl md:text-2xl text-white/80">Get ready!</p>
+      <div className="min-h-screen bg-gradient-to-br from-primary-600 via-accent-600 to-primary-700 flex items-center justify-center p-4 relative overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-pulse-slow"></div>
+        </div>
+        <div className="text-center relative z-10">
+          <div className="inline-block">
+            <h1 className="text-8xl sm:text-9xl md:text-[12rem] font-bold text-white mb-6 drop-shadow-2xl animate-scale-in" style={{ textShadow: '0 0 40px rgba(255,255,255,0.5)' }}>
+              {countdownValue}
+            </h1>
+          </div>
+          <p className="text-2xl sm:text-3xl md:text-4xl text-white/90 font-semibold animate-fade-in">Get ready!</p>
         </div>
       </div>
     );
@@ -386,7 +408,13 @@ export function WaitingRoomPage() {
   
   // Render waiting room
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center p-3 sm:p-4">
+    <div className="min-h-screen bg-gradient-to-br from-primary-600 via-accent-600 to-primary-700 flex items-center justify-center p-4 sm:p-6 relative overflow-hidden">
+      {/* Animated background */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-accent-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse-slow"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-primary-400 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse-slow" style={{ animationDelay: '1s' }}></div>
+      </div>
+      
       {/* Toast notification */}
       {toast && (
         <Toast
@@ -396,60 +424,85 @@ export function WaitingRoomPage() {
         />
       )}
       
-      <div className="bg-white rounded-2xl sm:rounded-3xl shadow-2xl p-4 sm:p-6 md:p-8 max-w-md sm:max-w-xl md:max-w-2xl w-full">
-        <h1 className="text-2xl sm:text-3xl font-bold text-center mb-2">Waiting Room</h1>
+      <div className="glass rounded-3xl shadow-large p-6 sm:p-8 md:p-10 max-w-md sm:max-w-xl md:max-w-2xl w-full relative z-10 animate-scale-in">
+        <div className="text-center mb-8">
+          <h1 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-2">Waiting Room</h1>
+          <p className="text-slate-600 text-sm font-medium">Players are joining...</p>
+        </div>
         
         {/* Game Code Display with Share Buttons */}
-        <div className="mb-6 sm:mb-8">
-          <p className="text-center text-gray-600 mb-3 text-sm sm:text-base">
-            Game Code: <span className="font-mono font-bold text-xl sm:text-2xl text-purple-600">{gameCode}</span>
-          </p>
-          
-          {/* Invite Buttons */}
-          <div className="flex flex-col sm:flex-row gap-2 justify-center">
-            <button
-              onClick={copyGameCode}
-              className="bg-gray-100 hover:bg-gray-200 active:bg-gray-300 active:scale-95 text-gray-700 font-medium py-2.5 sm:py-2 px-4 rounded-lg transition-all duration-75 flex items-center justify-center gap-2 text-sm sm:text-base min-h-[44px]"
-              style={{ touchAction: 'manipulation' }}
-              title="Copy game code"
-            >
-              📋 <span className="hidden sm:inline">Copy Code</span><span className="sm:hidden">Code</span>
-            </button>
+        <div className="mb-8">
+          <div className="bg-gradient-to-r from-accent-50 to-primary-50 rounded-2xl p-6 mb-4 border-2 border-accent-200">
+            <p className="text-center text-slate-600 mb-2 text-sm font-medium">Game Code</p>
+            <p className="text-center font-mono font-bold text-3xl sm:text-4xl text-accent-700 tracking-wider mb-4">
+              {gameCode}
+            </p>
             
-            <button
-              onClick={copyInviteLink}
-              className="bg-blue-100 hover:bg-blue-200 active:bg-blue-300 active:scale-95 text-blue-700 font-medium py-2.5 sm:py-2 px-4 rounded-lg transition-all duration-75 flex items-center justify-center gap-2 text-sm sm:text-base min-h-[44px]"
-              style={{ touchAction: 'manipulation' }}
-              title="Copy invite link"
-            >
-              🔗 <span className="hidden sm:inline">Copy Link</span><span className="sm:hidden">Link</span>
-            </button>
-            
-            <button
-              onClick={shareGame}
-              className="bg-green-100 hover:bg-green-200 active:bg-green-300 active:scale-95 text-green-700 font-medium py-2.5 sm:py-2 px-4 rounded-lg transition-all duration-75 flex items-center justify-center gap-2 text-sm sm:text-base min-h-[44px]"
-              style={{ touchAction: 'manipulation' }}
-              title="Share with friends"
-            >
-              📤 Share
-            </button>
+            {/* Invite Buttons */}
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <button
+                onClick={copyGameCode}
+                className="bg-white hover:bg-slate-50 border-2 border-slate-200 hover:border-slate-300 text-slate-700 font-semibold py-3 px-5 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 text-sm shadow-soft hover:shadow-medium active:scale-95"
+                style={{ touchAction: 'manipulation' }}
+                title="Copy game code"
+              >
+                <span>📋</span>
+                <span className="hidden sm:inline">Copy Code</span>
+                <span className="sm:hidden">Code</span>
+              </button>
+              
+              <button
+                onClick={copyInviteLink}
+                className="bg-white hover:bg-slate-50 border-2 border-slate-200 hover:border-slate-300 text-slate-700 font-semibold py-3 px-5 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 text-sm shadow-soft hover:shadow-medium active:scale-95"
+                style={{ touchAction: 'manipulation' }}
+                title="Copy invite link"
+              >
+                <span>🔗</span>
+                <span className="hidden sm:inline">Copy Link</span>
+                <span className="sm:hidden">Link</span>
+              </button>
+              
+              <button
+                onClick={shareGame}
+                className="bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-semibold py-3 px-5 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 text-sm shadow-medium hover:shadow-glow active:scale-95"
+                style={{ touchAction: 'manipulation' }}
+                title="Share with friends"
+              >
+                <span>📤</span>
+                <span>Share</span>
+              </button>
+            </div>
           </div>
         </div>
         
         {/* Players List */}
-        <div className="mb-6 sm:mb-8">
-          <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">Players ({players.length})</h2>
-          <div className="space-y-2">
+        <div className="mb-8">
+          <h2 className="text-lg sm:text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+            <span>Players</span>
+            <span className="bg-accent-100 text-accent-700 px-3 py-1 rounded-full text-sm font-semibold">
+              {players.length}
+            </span>
+          </h2>
+          <div className="space-y-3">
             {players.map(player => (
               <div 
                 key={player.id} 
-                className="bg-gray-100 rounded-lg p-3 flex items-center justify-between"
+                className={`bg-white rounded-xl p-4 flex items-center justify-between shadow-soft hover:shadow-medium transition-all ${
+                  player.id === playerId ? 'ring-2 ring-accent-500 bg-accent-50' : ''
+                }`}
               >
-                <span className="font-medium">
-                  {player.displayName}
-                  {player.id === playerId && ' (You)'}
-                </span>
-                {player.isHost && <span className="text-yellow-500">👑 Host</span>}
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl">{player.avatar}</span>
+                  <span className="font-semibold text-slate-900">
+                    {player.displayName}
+                    {player.id === playerId && <span className="ml-2 text-sm text-slate-500 font-normal">(You)</span>}
+                  </span>
+                </div>
+                {player.isHost && (
+                  <span className="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+                    👑 Host
+                  </span>
+                )}
               </div>
             ))}
           </div>
@@ -459,24 +512,31 @@ export function WaitingRoomPage() {
         {(isHost || players.length === 1) && (
           <>
             {players.length === 1 && (
-              <p className="text-center text-sm text-gray-500 mb-2">
+              <p className="text-center text-sm text-slate-500 mb-4 font-medium">
                 💡 You can start solo or wait for others to join
               </p>
             )}
             <button
               onClick={handleStartGame}
-              className="w-full bg-green-500 hover:bg-green-600 active:bg-green-700 active:scale-98 text-white font-bold py-3 sm:py-4 px-6 rounded-lg sm:rounded-xl transition-all duration-75 text-base sm:text-lg min-h-[56px]"
+              className="w-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 text-lg min-h-[56px] shadow-medium hover:shadow-glow active:scale-95 flex items-center justify-center gap-2"
               style={{ touchAction: 'manipulation' }}
             >
-              🎮 {players.length === 1 ? 'Start Solo Game' : 'Start Game'}
+              <span>🎮</span>
+              <span>{players.length === 1 ? 'Start Solo Game' : 'Start Game'}</span>
             </button>
           </>
         )}
         
         {!isHost && players.length > 1 && (
-          <p className="text-center text-gray-500 text-sm sm:text-base">
-            Waiting for host to start the game...
-          </p>
+          <div className="text-center">
+            <div className="inline-flex items-center gap-2 text-slate-600 font-medium">
+              <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              <span>Waiting for host to start the game...</span>
+            </div>
+          </div>
         )}
       </div>
     </div>

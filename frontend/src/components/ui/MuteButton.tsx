@@ -26,19 +26,22 @@ export const MuteButton: React.FC = () => {
       onClick={handleToggle}
       className={`
         fixed top-4 right-4 z-50
-        w-12 h-12 rounded-full
+        w-14 h-14 rounded-full
         flex items-center justify-center
-        transition-all duration-200
+        transition-all duration-300
+        backdrop-blur-md
         ${isMuted 
-          ? 'bg-gray-700 hover:bg-gray-600' 
-          : 'bg-green-600 hover:bg-green-500'}
-        shadow-lg active:scale-95
+          ? 'bg-slate-700/80 hover:bg-slate-600/80 border-2 border-slate-600' 
+          : 'bg-emerald-500/80 hover:bg-emerald-400/80 border-2 border-emerald-400'}
+        shadow-large hover:shadow-glow
+        active:scale-95
+        group
       `}
       style={{ touchAction: 'manipulation' }}
       aria-label={isMuted ? 'Unmute sounds' : 'Mute sounds'}
       title={isMuted ? 'Click to unmute' : 'Click to mute'}
     >
-      <span className="text-2xl">
+      <span className={`text-2xl transition-transform group-active:scale-110 ${isMuted ? 'opacity-70' : ''}`}>
         {isMuted ? '🔇' : '🔊'}
       </span>
     </button>
