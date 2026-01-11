@@ -50,8 +50,6 @@ export async function createSession(
     }
     throw error;
   }
-
-  return response.json();
 }
 
 /**
